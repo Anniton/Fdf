@@ -6,11 +6,26 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 14:50:21 by aquan             #+#    #+#             */
-/*   Updated: 2018/12/31 14:50:35 by aquan            ###   ########.fr       */
+/*   Updated: 2018/12/31 16:33:16 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "fdf.h"
+
+int		ft_first_line(char *s)
+{
+	int first_line;
+
+	first_line = 0;
+	while (*s != '\n')
+	{
+		first_line = ft_count_x(s);
+		++*s;
+	}
+	return (0);
+}
+
 
 int		ft_count_y(char *s)
 {
@@ -19,6 +34,7 @@ int		ft_count_y(char *s)
 
 	i = 0;
 	count = 0;
+	
 	while (s[i])
 	{
 		if (s[i] == '\n')
@@ -43,17 +59,18 @@ int		ft_count_x(char *s, int *i)
 		{
 			*i += 3;
 			while (s[*i + n] && ((s[*i + n] >= 'a' && s[*i + n] <= 'f') ||
-			(s[*i + n] >= 'A' && s[*i + n] <= 'F') || ft_isdigit(s[*i + n])))
+						(s[*i + n] >= 'A' && s[*i + n] <= 'F') || ft_isdigit(s[*i + n])))
 				++n;
 		}
 		else
 			return (0);
-	if (n > 8)
-		return (0);
-	*i += n;
+		if (n > 8)
+			return (0);
+		*i += n;
 	}
 	return (1);
 }
+
 int		ft_checkline(char *s)
 {
 	int i;
@@ -92,7 +109,7 @@ int		samplevalidity(char *argv, t_struct *start)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	start->nb_y = ft_count_y(buf);
+	start->nb_y = ft_count_y(fd);
 	start->nb_x = ft_checkline(buf);
 	close(fd);
 	return (1);
