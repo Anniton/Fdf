@@ -3,56 +3,55 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aquan <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: cmoulini <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/12/27 14:56:48 by aquan             #+#    #+#              #
-#    Updated: 2018/12/30 17:48:42 by aquan            ###   ########.fr        #
+#    Created: 2018/12/30 15:08:14 by cmoulini          #+#    #+#              #
+#    Updated: 2018/12/30 15:08:19 by cmoulini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		=	fdf
+NAME	=	fdf
 
-SRCS		=	key_hook.c main.c ft_line.c ft_mouse_event.c red_cross.c ft_mouse_move.c check.c
+LIBFT_PATH	=	libft/
+LIB		=	$(LIBFT_PATH)/libft.a
 
-OBJS		=	$(SRCS:.c=.o)
+LMLX_PATH	=	minilibx_macos/
+LMLX	=	$(LMLX_PATH)/libmlx.a
 
-LIBFT_PATH 	=	Libft/
-LIB			=	$(LIBFT_PATH)libft.a
+SRCS	=	get_int_tab.c check.c main.c
 
-LIBMLX_PATH		=	minilibx_macos/
-LIBMLX			=	$(LIBMLX_PATH)libmlx.a
+OBJS	=	$(SRCS:.c=.o)
 
 HDR		=	fdf.h
 
 CC		=	gcc
-CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Werror -Wextra
 
-MLXFLAGS = -framework OpenGL -framework AppKit
+FRAMEWORKS	=	-framework OpenGL -framework AppKit
 
-RM		=	rm -rf
+RM		=	rm -f
 
 CLEAN	=	clean
 
 all		:	$(NAME)
 
-$(LIB) : 
-	@make -C $(LIBFT_PATH) #--no-print-directory
+$(LIB)	:
+			@make -C $(LIBFT_PATH)
 
-$(LIBMLX) :
-	@make -C $(LIBMLX_PATH) 
+$(LMLX)		:	
+			@make -C $(LMLX_PATH)
 
-$(NAME)	:	$(OBJS) $(HDR) $(LIB) $(LIBMLX) 
-	@$(CC) $(LIB) $(LIBMLX) -o $(NAME) $(SRCS) -I $(HDR) $(MLXFLAGS) 
+$(NAME)	:	$(OBJS) $(HDR) $(LIB) $(LMLX)
+			@$(CC) $(CFLAGS) $(LIB) $(LMLX) -o $(NAME) $(SRCS) -I $(HDR) $(FRAMEWORKS)
 
 clean	:
-	$(RM) $(OBJS)
-	@make -C $(LIBFT_PATH) clean
-	@make -C $(LIBMLX_PATH) clean
+			@$(RM) $(OBJS)
+			@make clean -C $(LIBFT_PATH)
+			@make clean -C $(LMLX_PATH)
 
 fclean	:	clean
-	$(RM) $(NAME) $(LIB) $(LIBMLX)
+			@$(RM) $(NAME) $(LIB) $(LMLX)
 
 re		:	fclean all
 
-run		: $(NAME)
-	./fdf
+.PHONY:	all clean fclean re

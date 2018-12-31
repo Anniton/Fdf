@@ -1,18 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/28 16:13:49 by aquan             #+#    #+#             */
-/*   Updated: 2018/12/31 13:59:51 by aquan            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "fdf.h"
-#define BUFF_SIZE 2048
-#include <stdio.h>
 
 int		ft_count_y(char *s)
 {
@@ -33,7 +19,7 @@ int		ft_count_y(char *s)
 int		ft_count_x(char *s, int *i)
 {
 	int n;
-	
+
 	n = 0;
 	if (s[*i] == ' ' || s[*i] == '-')
 		++(*i);
@@ -41,7 +27,7 @@ int		ft_count_x(char *s, int *i)
 		++(*i);
 	if (s[*i] == ',')
 	{
-		if (s[*i + 1] == '0' && s[*i + 2] == 'x')	
+		if (s[*i + 1] == '0' && s[*i + 2] == 'x')
 		{
 			*i += 3;
 			while (s[*i + n] && ((s[*i + n] >= 'a' && s[*i + n] <= 'f') ||
@@ -78,24 +64,24 @@ int		ft_checkline(char *s)
 	return (x_len);
 }
 
-int		samplevalidity(char *argv)
+int		samplevalidity(char *argv, t_struct *start)
 {
 	int		fd;
 	int		ret;
-	char	buf[BUFF_SIZE];
-	int 	x;
+	char	buf[SIZE];
 
 	if ((fd = open(argv, O_RDONLY)) == -1)
 	{
 		write(1, "Error\n", 6);
 		return (0);
-	}	
-	if ((ret = read(fd, buf, BUFF_SIZE)) <= 0)
+	}
+	if ((ret = read(fd, buf, SIZE)) <= 0)
 	{
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	x = ft_checkline(buf);
+	start->nb_y = ft_count_y(buf);
+	start->nb_x = ft_checkline(buf);
 	close(fd);
-	return (x);
+	return (1);
 }
