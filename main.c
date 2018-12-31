@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/27 14:46:17 by aquan             #+#    #+#             */
-/*   Updated: 2018/12/30 13:10:54 by aquan            ###   ########.fr       */
+/*   Updated: 2018/12/30 20:09:26 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
 		write(1, "error\n", 6);
 	else
 	{	
-		samplevalidity(argv[1]);
+		printf("%d", samplevalidity(argv[1]));
 	}
 //	if(!(e = malloc(sizeof(t_param))))
 //		return (0);
