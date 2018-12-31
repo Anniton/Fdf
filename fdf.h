@@ -6,7 +6,7 @@
 /*   By: cmoulini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:08:28 by cmoulini          #+#    #+#             */
-/*   Updated: 2018/12/30 15:08:30 by cmoulini         ###   ########.fr       */
+/*   Updated: 2018/12/31 15:31:08 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct	s_struct
 int		**get_int_tab(int fd, t_struct *start);
 void	print_int_tab(int **tab, t_struct *start);
 int		ft_count_x(char *s, int *i);
-int		ft_count_y(char *s);
+int		ft_count_y(int fd);
 int		samplevalidity(char *argv, t_struct *start);
 int		ft_checkline(char *s);
 

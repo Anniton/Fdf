@@ -1,19 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/12/31 14:50:21 by aquan             #+#    #+#             */
+/*   Updated: 2018/12/31 15:32:38 by aquan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fdf.h"
 
-int		ft_count_y(char *s)
+int		ft_count_y(int fd)
 {
 	int i;
-	int count;
+	char **line = NULL;
 
 	i = 0;
-	count = 0;
-	while (s[i])
+	while (get_next_line(fd, line))
 	{
-		if (s[i] == '\n')
-			++count;
 		++i;
 	}
-	return (count);
+	return (i);
 }
 
 int		ft_count_x(char *s, int *i)
@@ -80,7 +89,7 @@ int		samplevalidity(char *argv, t_struct *start)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	start->nb_y = ft_count_y(buf);
+	start->nb_y = ft_count_y(fd);
 	start->nb_x = ft_checkline(buf);
 	close(fd);
 	return (1);
