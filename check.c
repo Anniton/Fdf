@@ -6,43 +6,12 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/31 14:50:21 by aquan             #+#    #+#             */
-/*   Updated: 2018/12/31 16:33:16 by aquan            ###   ########.fr       */
+/*   Updated: 2019/01/02 11:17:02 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "fdf.h"
-
-int		ft_first_line(char *s)
-{
-	int first_line;
-
-	first_line = 0;
-	while (*s != '\n')
-	{
-		first_line = ft_count_x(s);
-		++*s;
-	}
-	return (0);
-}
-
-
-int		ft_count_y(char *s)
-{
-	int i;
-	int count;
-
-	i = 0;
-	count = 0;
-	
-	while (s[i])
-	{
-		if (s[i] == '\n')
-			++count;
-		++i;
-	}
-	return (count);
-}
 
 int		ft_count_x(char *s, int *i)
 {
@@ -70,16 +39,70 @@ int		ft_count_x(char *s, int *i)
 	}
 	return (1);
 }
+int		ft_countline(char *s)
+{
+	
+	ft_strsplit(s, ' ');
+	while (s[i] && s[i] != '\n')
+	{
+		
+	}
+}
+int		ft_count_y(char *s, t_struct *start)
+{
+	int y_len;
+	int j;
+	int i;
+	int a;
+
+	i = 0;
+	y_len = 0;
+	j = 0;
+	a = ft_checkfirstline(s, start);	
+	while (s[i])
+	{
+		if (s[i] && s[i] == '\n' && ((ft_checkline(s + j) == start->firstline)))
+		{
+			j += (a + 1);
+			++y_len;
+		}
+		else if (s[i] && s[i] =='\n' && (ft_checkline(s + j) != start->firstline))
+		{	
+			write(1, "wrong sample\n", 13);
+			return (0);
+		}
+		++i;
+	}
+	return (y_len);
+}
+
+int		ft_checkfirstline(char *s, t_struct *start)
+{
+	int i;
+
+	start->firstline = 0;
+	i = 0;
+	while (s[i] && s[i] != '\n')
+	{
+		if (ft_isdigit(s[i]))
+		{
+			if (!(ft_count_x(s, &i)))
+				return (0);
+			++(start->firstline);
+		}
+		++i;
+	}
+	return (i);
+}
+
 
 int		ft_checkline(char *s)
 {
 	int i;
-	int count;
 	int x_len;
 
 	x_len = 0;
 	i = 0;
-	count = 0;
 	while (s[i] && s[i] != '\n')
 	{
 		if (ft_isdigit(s[i]))
@@ -109,7 +132,7 @@ int		samplevalidity(char *argv, t_struct *start)
 		write(1, "Error\n", 6);
 		return (0);
 	}
-	start->nb_y = ft_count_y(fd);
+	start->nb_y = ft_count_y(buf, start);
 	start->nb_x = ft_checkline(buf);
 	close(fd);
 	return (1);
