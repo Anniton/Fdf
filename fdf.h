@@ -6,7 +6,7 @@
 /*   By: cmoulini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:08:28 by cmoulini          #+#    #+#             */
-/*   Updated: 2019/01/04 15:07:59 by aquan            ###   ########.fr       */
+/*   Updated: 2019/01/04 18:12:43 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,13 @@ void	afficher(t_struct *start);
 void	ligne(void *mlx_ptr, void *win_ptr, int xi, int yi, int xf, int yf);
 void	segment(t_struct *start, int imin, int jmin, int imax, int jmax);
 void	positionne(int map_x, int map_y, int alt, int *screen_x, int *screen_y);
-int		get_alt(t_struct *start, int x, int y);
+void	afficher_pc(t_struct *start);
+//void	segment_pc(t_struct *start, int imin, int jmin, int imax, int jmax);
+void	position_pc(int map_x, int map_y, int z, int *screen_x, int *screen_y);
+
+
+int		get_z_pc(t_struct *start, int x, int y);
+//int		get_alt(t_struct *start, int x, int y);
 int 	close_w(void *param);
 int		key_event(int key, t_struct *param);
 

@@ -6,50 +6,34 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/04 14:27:20 by aquan             #+#    #+#             */
-/*   Updated: 2019/01/04 16:43:20 by aquan            ###   ########.fr       */
+/*   Updated: 2019/01/04 18:17:02 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		get_alt(t_struct *start, int y, int x)
+int		get_z_pc(t_struct *start, int y, int x)
+{
+	int z;	
+	z = (start->final[y][x]) + (1 / 2) * sin(45) * y;
+	return (z);
+}
+
+
+void	position_pc(int map_x, int map_y, int z, int *screen_x, int *screen_y)
 {
 	
-	int alt = start->final[y][x];
-	return (alt);
+	*screen_x =  map_x + (1 / 2) * cos(45) * map_y;
+   	*screen_y =  map_y * (1 / 2) * z;
 }
 
-void	positionne(int map_x, int map_y, int alt, int *screen_x, int *screen_y)
-{
-	int centre_x;
-	int centre_y;
-	
-	centre_x = 1000 / 2 - (19 - 1) * (WIDTH + STEP);
-	centre_y = 1000 / 2 - (11 - 1) * (HEIGHT + STEP);
-	*screen_x = centre_x + map_x * (WIDTH + STEP) + map_y * (HEIGHT + STEP);
-   	*screen_y = centre_y + map_x * (WIDTH + STEP) / 2 - map_y * (HEIGHT + STEP) / 2 - alt * 2;
-}
-
-void segment(t_struct *start, int ymin, int xmin, int ymax, int xmax)
-{
-	int xi;
-	int yi;
-	int xf;
-	int yf;	
-	int alt;
-
-	alt = 0;
-	positionne(ymin, xmin, get_alt(start, ymin, xmin), &xi, &yi);
-	positionne(ymax,xmax, get_alt(start, ymax, xmax), &xf, &yf);
-	ligne(start->mlx_ptr, start->win_ptr, xi, yi, xf, yf);
-}
-void	afficher(t_struct *start)
+void	afficher_pc(t_struct *start)
 {
 	int x;
 	int y;
 
 	start->mlx_ptr = mlx_init();
-	start->win_ptr = mlx_new_window(start->mlx_ptr, start->nb_y * start->nb_y * WIDTH, start->nb_y * start->nb_y * WIDTH, "petit carre");
+	start->win_ptr = mlx_new_window(start->mlx_ptr, 1000, 1000, "petit carre");
 	y = 0;
 	while (y < start->nb_y)
 	{
@@ -57,9 +41,9 @@ void	afficher(t_struct *start)
 		while(x < start->nb_x)
 		{
 			if (x != start->nb_x - 1)	
-				segment(start, y, x, y, x + 1);	
+				ligne(start->mlx_ptr, start->win_ptr, y, x, y, x * get_z_pc(start, y, x));	
 			if (y != start->nb_y - 1)	
-				segment(start, y, x, y + 1, x);
+				ligne(start->mlx_ptr, start->win_ptr, y, x, y * get_z_pc(start, y, x), x);
 			x++;
 		}
 		y++;
