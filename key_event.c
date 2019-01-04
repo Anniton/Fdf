@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key_event.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cmoulini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/30 15:08:38 by cmoulini          #+#    #+#             */
-/*   Updated: 2019/01/04 14:03:48 by aquan            ###   ########.fr       */
+/*   Created: 2018/12/26 13:48:31 by cmoulini          #+#    #+#             */
+/*   Updated: 2019/01/04 13:49:01 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int	main(int argc, char **argv)
+int key_event(int key, t_struct *param)
 {
-	int fd;
-	t_struct *start;
-
-	(void)argc;
-	fd = 0;
-	start = malloc(sizeof(t_struct));
-	fd = open(argv[1], O_RDONLY);
-	start->final = (int **)malloc(sizeof(int*));
-	ft_bzero(start->final, 1);
-	if (check_sample_validity_jg(fd, start))
+    ft_putnbr(key);
+    if (key == 53)
 	{
-		// ft_putendl("OL");		
-		print_int_tab(start->final, start);
-		afficher(start);
+		free(param);
+        exit (EXIT_SUCCESS);
 	}
-	else
-		ft_putendl("Wrong format");
-	close(fd);
-	return(0);
+    return (0);
 }
