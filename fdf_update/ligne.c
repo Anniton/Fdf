@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:16:09 by aquan             #+#    #+#             */
-/*   Updated: 2019/01/18 18:43:11 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/06 21:53:50 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ligne_2(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 			cumul -= abs(f->y - i->y);
 			x += (i->x < f->x) ? 1 : -1;
 		}
-		pixel_put_img(start->img_str, x, y, 0x00FFFF);
+		if (x > 0 && y > 0 && x < WIN_W && y < WIN_H)
+			pixel_put_img(start->img_str, x, y, 0xFF0000);
 		m++;
 	}
 }
@@ -59,7 +60,8 @@ void	ligne_3(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 			if (f->y - i->y != 0)
 				y += (i->y < f->y) ? 1 : -1;
 		}
-		pixel_put_img(start->img_str, x, y, 0x134BAC);
+		if (x > 0 && y > 0 && x < WIN_W && y < WIN_H)	
+			pixel_put_img(start->img_str, x, y, 0xFF0000);
 		m++;
 	}
 }
@@ -71,7 +73,8 @@ void	ligne_1(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 
 	x = i->x;
 	y = i->y;
-	pixel_put_img(start->img_str, x, y, couleur(start, y, x));
+	if (x > 0 && y > 0 && x < WIN_W && y < WIN_W)	
+		pixel_put_img(start->img_str, x, y, 0xFF0000);
 	if (abs(f->x - i->x) > abs(f->y - i->y))
 		ligne_3(start, i, f);
 	else

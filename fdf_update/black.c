@@ -6,38 +6,33 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 13:44:50 by aquan             #+#    #+#             */
-/*   Updated: 2019/01/18 18:32:39 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/06 22:08:57 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+#include <stdio.h>
 void	pixel_put_img(int *img_ptr, int x, int y, int px_color)
 {
-	img_ptr[x + y * WIN_W] = px_color; 
-}
-/*
-static int rgb(int r, int g, int b)
-{
-	return (256 * 256 *(r) + 256 * (g) + (b));
+	if (x > 0 && y > 0 && x < WIN_W && y < WIN_H)
+		img_ptr[x + y * (WIN_W)] = px_color; 
 }
 
-int		couleur(t_struct *start)
+void	info_put(t_struct *start)
+{
+	mlx_string_put(start->mlx_ptr, start->win_ptr, 10, 10, 0xFFFFFF, "Vue Iso : 1");
+	mlx_string_put(start->mlx_ptr, start->win_ptr, 10, 25, 0xFFFFFF, "Vue Cavaliere : 2");
+	mlx_string_put(start->mlx_ptr, start->win_ptr, 10, 40, 0xFFFFFF, "Zoom : +");
+	mlx_string_put(start->mlx_ptr, start->win_ptr, 10, 55, 0xFFFFFF, "Dezoom : -");
+}
+int	pixel_color(t_struct *start, int y, int x)
 {
 	int px_color;
-	int x;
-	int y;
-
-		if (get_alt(start, y, x) == 0)
-		px_color = 0x134BAC;
+	if (get_alt(start, y, x) == 0)
+		px_color = 0x000000;
 	if (get_alt(start, y, x) > 0)
-		px_color = 0xF3B72C;
+		px_color = 0x452648;
 	if (get_alt(start, y, x) < 0)
-		px_color = 0x134BAC;
+		px_color = 0xAA4578;
 	return (px_color);
 }
-
-*/
-//return ((int)(rgb(127.5 * (cos(t) + 1), 127.5 * (sin(t) + 1),127.5 * (1 - cos(t)))));
-	//return (0xff / (t + 1));
-

@@ -6,7 +6,7 @@
 #    By: cmoulini <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/30 15:08:14 by cmoulini          #+#    #+#              #
-#    Updated: 2019/01/11 15:32:28 by aquan            ###   ########.fr        #
+#    Updated: 2019/02/06 22:05:22 by aquan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJS	=	$(SRCS:.c=.o)
 HDR		=	fdf.h
 
 CC		=	gcc
-CFLAGS	=	-Wall -Werror -Wextra
+CFLAGS	=	-Wall -Werror -Wextra -g #-fsanitize=address -fno-omit-frame-pointer
 
 FRAMEWORKS	=	-framework OpenGL -framework AppKit
 

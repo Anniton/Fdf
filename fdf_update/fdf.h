@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:14:33 by aquan             #+#    #+#             */
-/*   Updated: 2019/01/18 17:32:02 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/06 21:56:26 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,21 @@
 # include <fcntl.h>
 # include <stdio.h>
 
-# define color 0x6600FF
+# define color 0xFFFFFF
 # define SIZE 2048
-# define STEP 10
-# define WIDTH 1
-# define HEIGHT 1
-# define WIN_H 1000
-# define WIN_W 1000
+# define WIDTH 2
+# define HEIGHT 2
+# define WIN_H 1500
+# define WIN_W 1500
 # define RGB
 
+
+typedef struct s_tool
+{
+	unsigned int step;
+	unsigned int left;
+	unsigned int up;
+}			t_tool;
 
 typedef struct	s_struct
 {
@@ -44,10 +50,11 @@ typedef struct	s_struct
 	void	*win_ptr;
 	void 	*img_ptr;
 	int 	*img_str;
+	int		affichage;
 	int		l;
 	int 	bpp;
 	int 	e;
-
+	t_tool	*tool;
 }				t_struct;
 
 typedef struct s_coord_2
@@ -55,6 +62,7 @@ typedef struct s_coord_2
 	int x;
 	int y;
 }				t_coord_2;
+
 
 int		**get_int_tab(int fd, t_struct *start);
 void	print_int_tab(int **tab, t_struct *start);
@@ -69,10 +77,11 @@ void	ligne_1(t_struct *start, t_coord_2 *i, t_coord_2 *f);
 void	ligne_2(t_struct *start, t_coord_2 *i, t_coord_2 *f);
 void	ligne_3(t_struct *start, t_coord_2 *i, t_coord_2 *f);
 int 	close_w(void *param);
+void	move_left(int key, t_struct *param);
 int 	key_event(int key, t_struct *param);
 int		put_berk(t_struct *param);
 void	pixel_put_img(int *img_ptr, int x, int y, int px_color);
-int     couleur(t_struct *start, int x, int y);
+int     pixel_color(t_struct *start, int y, int x);
 int 	get_alt(t_struct *start, int y, int x);
-
+void	info_put(t_struct *start);
 #endif

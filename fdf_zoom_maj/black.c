@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 13:44:50 by aquan             #+#    #+#             */
-/*   Updated: 2019/01/21 11:36:59 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/06 17:54:32 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int rgb(int r, int g, int b)
 {
 	return (255 * 255 *(r) + 256 * (g) + (b));
 }
-*/
+*/ /*
 int	pixel_color(t_struct *start, int y, int x)
 {
 	int px_color;
@@ -43,4 +43,4 @@ int	pixel_color(t_struct *start, int y, int x)
 	if (get_alt(start, y, x) < 0)
 		px_color = 0xAA4578;
 	return (px_color);
-}
+}*/

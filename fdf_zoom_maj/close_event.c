@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   view_event.c                                       :+:      :+:    :+:   */
+/*   close_event.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/09 11:21:55 by aquan             #+#    #+#             */
-/*   Updated: 2019/01/09 12:48:51 by aquan            ###   ########.fr       */
+/*   Created: 2019/02/06 17:14:41 by aquan             #+#    #+#             */
+/*   Updated: 2019/02/06 18:46:23 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		key_iso_press(int key, t_struct *start)
+static int		destroy_all(t_struct *env)
 {
-
-	ft_putnbr(key);
-	if (key == 83)
-		afficher(start);
-	if (key == 84)
-		afficher_pc(start);
-	return (0);
+	free(env->final);
+	//free(env->tool);
+	mlx_destroy_image(env->mlx_ptr, env->img_ptr);
+	mlx_clear_window(env->mlx_ptr, env->win_ptr);
+	mlx_destroy_window(env->mlx_ptr, env->win_ptr);
+	free(env);
+	return (SUCCESS);
 }
 
+int		event(int key, t_struct *param)
+{
+	if (key == K_ESC)
+	{	
+		destroy_all(param);
+		exit(SUCCESS);
+	}
+	return (SUCCESS);
+}

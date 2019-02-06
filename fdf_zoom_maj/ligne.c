@@ -6,13 +6,13 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:16:09 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/06 16:51:19 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/06 18:46:14 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	ligne_2(t_struct *start, t_coord_2 *i, t_coord_2 *f)
+void	ligne_2(t_struct *start, t_vector_2d *i, t_vector_2d *f)
 {
 	int m;
 	int cumul;
@@ -39,7 +39,7 @@ void	ligne_2(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 	}
 }
 
-void	ligne_3(t_struct *start, t_coord_2 *i, t_coord_2 *f)
+void	ligne_3(t_struct *start, t_vector_2d *i, t_vector_2d *f)
 {
 	int m;
 	int cumul;
@@ -66,7 +66,7 @@ void	ligne_3(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 	}
 }
 
-void	ligne_1(t_struct *start, t_coord_2 *i, t_coord_2 *f)
+void	put_line(t_struct *start, t_vector_2d *i, t_vector_2d *f)
 {
 	int x;
 	int y;
