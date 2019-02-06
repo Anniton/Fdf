@@ -6,7 +6,7 @@
 #    By: cmoulini <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/30 15:08:14 by cmoulini          #+#    #+#              #
-#    Updated: 2019/01/04 17:10:59 by aquan            ###   ########.fr        #
+#    Updated: 2019/01/09 12:19:29 by aquan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,7 @@ LIB		=	$(LIBFT_PATH)/libft.a
 LMLX_PATH	=	minilibx_macos/
 LMLX	=	$(LMLX_PATH)/libmlx.a
 
-SRCS	=	key_event.c close.c get_int_tab.c check_sample.c main.c ligne.c afficher.c persp_cav.c
-
+SRCS	=	key_event.c close.c get_int_tab.c check_sample.c main.c ligne.c axonometrie.c isometrie.c view_event.c
 OBJS	=	$(SRCS:.c=.o)
 
 HDR		=	fdf.h

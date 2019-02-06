@@ -6,7 +6,7 @@
 /*   By: cmoulini <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/30 15:08:38 by cmoulini          #+#    #+#             */
-/*   Updated: 2019/01/04 17:15:36 by aquan            ###   ########.fr       */
+/*   Updated: 2019/01/11 15:17:31 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 	{
 		// ft_putendl("OL");		
 		print_int_tab(start->final, start);
+		afficher(start);
 		afficher_pc(start);
 	}
 	else

@@ -1,58 +1,65 @@
 #include "fdf.h"
 
-void	ligne(void *mlx_ptr, void *win_ptr, int xi, int yi, int xf, int yf)
+void	ligne_2(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 {
-	int dx;
-	int dy;
-	int i;
-	int xinc;
-	int yinc;
+	int m;
 	int cumul;
 	int x;
 	int y;
 
-	x = xi;
-	y = yi;
-	dx = abs(xf - xi);
-	dy = abs (yf - yi);
-	xinc = (xi < xf) ? 1 : -1;
-	yinc = (yi < yf) ? 1 : -1;
-	mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
-	if (dy == 0)
-		yinc = 0;
-	if (dx > dy)
+	x = i->x;
+	y = i->y;
+	cumul = abs(f->y - i->y) / 2;
+	m = 1;
+	while (m <= abs(f->y - i->y))
 	{
-		cumul = dx / 2;
-		i = 1;
-		while (i <= dx)
+		y += (i->y < f->y) ? 1 : -1;
+		cumul += abs(f->x - i->x);
+		if (cumul >= abs(f->y - i->y))
 		{
-			x += xinc;
-			cumul += dy;
-			if (cumul >= dy)
-			{
-				cumul -= dx;
-				y += yinc;
-			}
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
-			i++;
+			cumul -= abs(f->y - i->y);
+			x += (i->x < f->x) ? 1 : -1;
 		}
+		mlx_pixel_put(start->mlx_ptr, start->win_ptr, x, y, color);
+		m++;
 	}
-	else
-	{
-		cumul = dy / 2;
-		i = 1;
-		while (i <= dy)
-		{
-			y += yinc;
-			cumul += dx;
-			if (cumul >= dy)
-			{
-				cumul -= dy;
-				x += xinc;
-			}
-			mlx_pixel_put(mlx_ptr, win_ptr, x, y, color);
-			i++;
-		}
-	}
+}
 
+void	ligne_3(t_struct *start, t_coord_2 *i, t_coord_2 *f)
+{
+	int m;
+	int cumul;
+	int x;
+	int y;
+
+	x = i->x;
+	y = i->y;
+	cumul = abs(f->x - i->x) / 2;
+	m = 1;
+	while (m <= abs(f->x - i->x))
+	{
+		x += (i->x < f->x) ? 1 : -1;
+		cumul += abs(f->y - i->y);
+		if (cumul >= abs(f->y - i->y))
+		{
+			cumul -= abs(f->x - i->x);
+			y += (i->y < f->y) ? 1 : -1;
+		}
+		mlx_pixel_put(start->mlx_ptr, start->win_ptr, x, y, color);
+		m++;
+	}
+}
+
+void	ligne(t_struct *start, t_coord_2 *i, t_coord_2 *f)
+{
+	int x;
+	int y;
+
+	x = i->x;
+	y = i->y;
+	mlx_pixel_put(start->mlx_ptr, start->win_ptr, x, y, color);
+	if (abs(f->x - i->x) > abs(f->y - i->y))
+		ligne_3(start, i, f);
+	else
+		ligne_2(start, i, f);
 }
