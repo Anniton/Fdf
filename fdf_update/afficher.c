@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 21:11:45 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/06 22:09:07 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/07 12:38:02 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	segment_x(t_struct *start, int y, int x)
 	centre_x = (WIN_W / 2 - (start->nb_x * (WIDTH + start->tool->step) / 2)) + start->tool->left;
 	centre_y = (WIN_H / 2 - (start->nb_y * (HEIGHT + start->tool->step) / 2)) + start->tool->up;
 	i.x = centre_x + x * (WIDTH + start->tool->step) - y * (HEIGHT + start->tool->step);
+	printf("VAL STEP IN SEG = %d\n", start->tool->step);
 	i.y = centre_y + x * (WIDTH + start->tool->step) / 2 + y * (HEIGHT + start->tool->step)
 		/ 2 - (get_alt(start, y, x) + start->tool->step);
 	f.x = centre_x + (x + 1) * (WIDTH + start->tool->step) - y * (HEIGHT + start->tool->step);

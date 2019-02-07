@@ -6,17 +6,53 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:16:41 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/06 22:12:57 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/07 12:55:24 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int		tile_size(t_struct *start)
+{
+	if (start->nb_x > start->nb_y)
+	{
+		start->tool->step = (start->win_w - 1000) / start->nb_x;
+		printf("VAL STEP =  %d\n", start->tool->step); 
+//		start->coef_y = start->win_w - 250 / start->nb_x;
+	}
+	else
+	{
+		start->tool->step = (start->win_h - 1000) / start->nb_y;
+//		start->coef_y = start->win_w - 250 / start->nb_x;
+	}
+	if (start->tool->step <= 1)
+	{
+		start->tool->step = 1;
+	}
+	return (0);
+}
+
+int		size_window(t_struct *start)
+{
+	start->win_h = start->nb_x * 40;
+	start->win_w = start->nb_y * 45;
+	if (start->win_h > 2000)
+		start->win_h = 2000;
+	if (start->win_h < 800)
+		start->win_h = 800;
+	if (start->win_w > 2000)
+		start->win_w = 2000;
+	if (start->win_w < 800)
+		start->win_w = 800;
+	return (0);
+}
+
 int		create_win_and_image(t_struct *env)
 {
 	env->mlx_ptr = mlx_init();
-	env->win_ptr = mlx_new_window(env->mlx_ptr, WIN_W, WIN_H, "petit carre");
-	env->img_ptr = mlx_new_image(env->mlx_ptr, WIN_W, WIN_H);
+	size_window(env);
+	env->win_ptr = mlx_new_window(env->mlx_ptr, env->win_w, env->win_h, "petit carre");
+	env->img_ptr = mlx_new_image(env->mlx_ptr, env->win_w, env->win_h);
 	env->img_str = (int*)mlx_get_data_addr(env->img_ptr, &(env->bpp), &(env->l), &(env->e));
 	env->affichage = 1;
 	return (0);
@@ -56,6 +92,7 @@ int	main(int argc, char **argv)
 		print_int_tab(env->final, env);
 		create_win_and_image(env);
 		env->tool->step = env->nb_x - env->nb_y / 2;
+		tile_size(env);
 		afficher(env);
 		info_put(env);
 		mlx_hook(env->win_ptr, 17, (1L << 17), close_w, env);

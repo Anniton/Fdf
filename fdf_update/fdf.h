@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:14:33 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/06 21:56:26 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/07 12:51:45 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@
 # define SIZE 2048
 # define WIDTH 2
 # define HEIGHT 2
-# define WIN_H 1500
-# define WIN_W 1500
 # define RGB
 
 
@@ -38,12 +36,15 @@ typedef struct s_tool
 	unsigned int step;
 	unsigned int left;
 	unsigned int up;
+	unsigned int coef_x;
 }			t_tool;
 
 typedef struct	s_struct
 {
 	int		nb_x;
 	int 	nb_y;
+	int 	win_h;
+	int		win_w;
 	int 	firstline;
 	int 	**final;
 	void	*mlx_ptr;
