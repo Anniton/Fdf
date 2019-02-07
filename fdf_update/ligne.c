@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:16:09 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/06 21:53:50 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/07 15:03:57 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ligne_2(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 			cumul -= abs(f->y - i->y);
 			x += (i->x < f->x) ? 1 : -1;
 		}
-		if (x > 0 && y > 0 && x < WIN_W && y < WIN_H)
-			pixel_put_img(start->img_str, x, y, 0xFF0000);
+		if (x > 0 && y > 0 && x < start->win_w && y < start->win_h)
+			pixel_put_img(start->img_str, x, y, 0xFF0000, start);
 		m++;
 	}
 }
@@ -60,8 +60,8 @@ void	ligne_3(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 			if (f->y - i->y != 0)
 				y += (i->y < f->y) ? 1 : -1;
 		}
-		if (x > 0 && y > 0 && x < WIN_W && y < WIN_H)	
-			pixel_put_img(start->img_str, x, y, 0xFF0000);
+		if (x > 0 && y > 0 && x < start->win_w && y < start->win_h)	
+			pixel_put_img(start->img_str, x, y, 0xFF0000, start);
 		m++;
 	}
 }
@@ -73,8 +73,8 @@ void	ligne_1(t_struct *start, t_coord_2 *i, t_coord_2 *f)
 
 	x = i->x;
 	y = i->y;
-	if (x > 0 && y > 0 && x < WIN_W && y < WIN_W)	
-		pixel_put_img(start->img_str, x, y, 0xFF0000);
+	if (x > 0 && y > 0 && x < start->win_w && y < start->win_w)	
+		pixel_put_img(start->img_str, x, y, 0xFF0000, start);
 	if (abs(f->x - i->x) > abs(f->y - i->y))
 		ligne_3(start, i, f);
 	else

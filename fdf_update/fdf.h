@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:14:33 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/07 12:51:45 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/07 15:18:36 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,15 @@
 
 # define color 0xFFFFFF
 # define SIZE 2048
-# define WIDTH 2
-# define HEIGHT 2
 # define RGB
 
 
 typedef struct s_tool
 {
-	unsigned int step;
-	unsigned int left;
-	unsigned int up;
-	unsigned int coef_x;
+	int step;
+	int left;
+	int up;
+	int coef_x;
 }			t_tool;
 
 typedef struct	s_struct
@@ -81,7 +79,7 @@ int 	close_w(void *param);
 void	move_left(int key, t_struct *param);
 int 	key_event(int key, t_struct *param);
 int		put_berk(t_struct *param);
-void	pixel_put_img(int *img_ptr, int x, int y, int px_color);
+void	pixel_put_img(int *img_ptr, int x, int y, int px_color, t_struct *start);
 int     pixel_color(t_struct *start, int y, int x);
 int 	get_alt(t_struct *start, int y, int x);
 void	info_put(t_struct *start);

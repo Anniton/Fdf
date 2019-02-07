@@ -6,16 +6,16 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 13:44:50 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/06 22:08:57 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/07 15:17:30 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
-void	pixel_put_img(int *img_ptr, int x, int y, int px_color)
+void	pixel_put_img(int *img_ptr, int x, int y, int px_color, t_struct *start)
 {
-	if (x > 0 && y > 0 && x < WIN_W && y < WIN_H)
-		img_ptr[x + y * (WIN_W)] = px_color; 
+	if (x > 0 && y > 0 && x < start->win_w && y < start->win_h)
+		img_ptr[x + y * (start->win_w)] = px_color; 
 }
 
 void	info_put(t_struct *start)
