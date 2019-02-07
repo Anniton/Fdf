@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:13:20 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/06 21:57:52 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/07 18:29:47 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,23 @@ int	ft_arrlen(char **arr)
 	return (i);
 }
 
-int	*ft_convert(char **tab)
+int		*ft_convert(char **tab)
 {
 	int	*tab_int;
 	int	len;
 	int	i;
 
 	len = ft_arrlen(tab);
-	tab_int = (int*)malloc(sizeof(*tab_int) * len);
+	if (!(tab_int = (int*)malloc(sizeof(*tab_int) * len)))
+		return (NULL);
 	i = 0;
 	while (i < len)
 	{
 		tab_int[i] = ft_atoi(tab[i]);
+		free(tab[i]);
 		i++;
 	}
+	free(tab);
 	return (tab_int);
 }
 
@@ -71,15 +74,18 @@ void	ft_arrcpy(int **src, int **dst, int height, int width)
 	i = 0;
 	while (i < height)
 	{
-		dst[i] = (int*)malloc(sizeof(**dst) * width);
+		if (!(dst[i] = (int*)malloc(sizeof(int) * width)))
+			return ;
 		j = 0;
 		while (j < width)
 		{
 			dst[i][j] = src[i][j];
 			j++;
 		}
+		free(src[i]);
 		i++;
 	}
+	free(src);
 }
 
 int	check_sample_validity(int fd, t_struct *start)
@@ -98,11 +104,12 @@ int	check_sample_validity(int fd, t_struct *start)
 	{
 		if (tab)
 			tmp = tab;
-		tab = (int**)ft_memalloc(sizeof(*tab) * (len + 1));		
+		if (!(tab = (int**)ft_memalloc(sizeof(int*) * (len + 1))))
+			return (0);
 		if (!(ft_check_x(line)))
 			return(0);
 		s_split = ft_strsplit(line, ' ');
-		ft_strdel(&line);
+		free(line);
 		if (start->firstline == 0)
 		{
 			start->nb_x = ft_arrlen(s_split);
@@ -114,7 +121,6 @@ int	check_sample_validity(int fd, t_struct *start)
 		if (len > 0)
 			ft_arrcpy(tmp, tab, len, len_of_a_line);
 		tab[len] = ft_convert(s_split);
-		ft_free_tab((void**)s_split, len);
 		len++;
 	}
 	start->nb_y = len;

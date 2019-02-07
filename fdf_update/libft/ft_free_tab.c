@@ -6,7 +6,7 @@
 /*   By: loucarpe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 16:24:07 by loucarpe          #+#    #+#             */
-/*   Updated: 2018/12/11 16:24:57 by loucarpe         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:31:07 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	ft_free_tab(void **tab, int len)
 		if (tab[i])
 		{
 			free(tab[i]);
-			tab[i] = NULL;
+			//tab[i] = NULL;
 		}
 		i++;
 	}
 	free(tab);
-	tab = NULL;
+//	tab = NULL;
 }

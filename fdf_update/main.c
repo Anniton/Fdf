@@ -6,7 +6,7 @@
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/11 11:16:41 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/07 15:24:11 by aquan            ###   ########.fr       */
+/*   Updated: 2019/02/07 18:27:14 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int		tile_size(t_struct *start)
 {
 	if (start->nb_x > start->nb_y)
 	{
-		start->tool->step = 3; //(start->win_w - 700) / (start->nb_x);
+		start->tool->step = (start->win_w - 700) / (start->nb_x);
 		printf("VAL STEP =  %d\n", start->tool->step); 
 //		start->coef_y = start->win_w - 250 / start->nb_x;
 	}
 	else
 	{
-		start->tool->step = 20;//(start->win_h - 700) / (start->nb_y);
+		start->tool->step = (start->win_h - 700) / (start->nb_y);
 //		start->coef_y = start->win_w - 250 / start->nb_x;
 	}
 	if (start->tool->step <= 1)
