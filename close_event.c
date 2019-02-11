@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memalloc.c                                      :+:      :+:    :+:   */
+/*   cross_event.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aquan <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/08 16:18:05 by aquan             #+#    #+#             */
-/*   Updated: 2019/02/08 16:18:09 by aquan            ###   ########.fr       */
+/*   Created: 2019/02/07 20:07:41 by aquan             #+#    #+#             */
+/*   Updated: 2019/02/08 16:59:30 by aquan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "fdf.h"
 
-void	*ft_memalloc(size_t size)
+int		cross_event(t_struct *env)
 {
-	void *mem;
+	destroy_all(env);
+	exit(EXIT_SUCCESS);
+}
 
-	if (size == 0)
-		return (NULL);
-	if (!(mem = malloc((size))))
-		return (NULL);
-	ft_bzero(mem, size);
-	return (mem);
+int		esc_key(int key, t_struct *env)
+{
+	if (key == 53)
+	{
+		destroy_all(env);
+		exit(EXIT_SUCCESS);
+	}
+	return (0);
 }
